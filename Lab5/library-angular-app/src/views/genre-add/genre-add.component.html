@@ -1,0 +1,16 @@
+<div>
+    <h2>Add New Genre</h2>
+    <form class="box bg vertical" (ngSubmit)="addGenre()">
+        <table>
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input id="name" [(ngModel)]="genre.name" name="name" required /></td>
+            </tr>
+            <tr>
+                <td><label for="popularity">Popularity:</label></td>
+                <td><input id="popularity" [(ngModel)]="genre.popularity" name="popularity" required /></td>
+            </tr>
+            <button class="box bg button" type="submit">Add Genre</button>
+        </table>
+    </form>
+</div>

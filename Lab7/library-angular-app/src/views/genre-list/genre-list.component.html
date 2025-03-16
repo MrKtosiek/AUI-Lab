@@ -1,0 +1,12 @@
+<div>
+    <h2>Book genres</h2>
+        <ul class="element-list">
+            <li class="box bg horizontal" *ngFor="let genre of genres">
+                {{ genre.name }}
+                <a class="box bg button align-right" routerLink="/genres/edit/{{genre.id}}">Edit</a>
+                <a class="box bg button" routerLink="/genres/{{genre.id}}/details">Details</a>
+                <button class="box bg button delete" (click)="deleteGenre(genre.id)">Delete</button>
+            </li>
+        </ul>
+    <a class="box bg button" routerLink="/genres/add">Add New Genre</a>
+</div>

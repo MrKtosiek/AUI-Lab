@@ -1,0 +1,80 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --background-color: #222222;
+    --text-color: #ffffff;
+    --link-color: #b0b0b0;
+
+    --button-color: #0081cc;
+    --button-hover-color: #00649d;
+    --delete-button-color: #aa0000;
+    --delete-button-hover-color: #830000;
+
+    --secondary-background-color: #303030;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 30px 200px 30px 200px;
+}
+
+:any-link {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.box {
+    display: flex;
+}
+.box.horizontal {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.box.vertical {
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+.bg {
+    line-height: 15px;
+    font-size: 15px;
+    padding: 8px;
+    margin: 5px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.button {
+    text-transform: uppercase;
+    background-color: var(--button-color);
+    color: var(--text-color) !important;
+}
+.button:hover {
+    background-color: var(--button-hover-color);
+}
+
+.button.delete {
+    background-color: var(--delete-button-color);
+}
+.button.delete:hover {
+    background-color: var(--delete-button-hover-color);
+}
+
+.element-list {
+    padding: 0;
+}
+.element-list li {
+    background-color: var(--secondary-background-color);
+    list-style-type: none;
+}
+
+.align-right {
+    margin-left: auto;
+}
+
+form {
+    background-color: var(--secondary-background-color);
+}

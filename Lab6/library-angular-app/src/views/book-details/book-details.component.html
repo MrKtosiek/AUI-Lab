@@ -1,0 +1,30 @@
+<div>
+    <a routerLink="/genres/{{genre.id}}/details">Go back</a>
+    <h2>{{ book.name }}</h2>
+    <table>
+        <tr>
+            <td>Author first name: </td>
+            <td><b>{{ book.authorFirstName }}</b></td>
+        </tr>
+        <tr>
+            <td>Author last name: </td>
+            <td><b>{{ book.authorLastName }}</b></td>
+        </tr>
+        <tr>
+            <td>Genre: </td>
+            <td><b>{{ genre.name }}</b></td>
+        </tr>
+        <tr>
+            <td>Popularity: </td>
+            <td><b>{{ book.popularity }}</b></td>
+        </tr>
+        <tr>
+            <td>Book ID: </td>
+            <td><b>{{ book.id }}</b></td>
+        </tr>
+        <tr>
+            <td>Genre ID: </td>
+            <td><b>{{ book.genreId }}</b></td>
+        </tr>
+    </table>
+</div>
