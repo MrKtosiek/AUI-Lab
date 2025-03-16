@@ -1,0 +1,55 @@
+### Create a new genre
+POST http://localhost:8080/api/genres
+Content-Type: application/json
+
+{
+  "name": "Crime",
+  "popularity": 4.5
+}
+
+### Get all genres
+GET http://localhost:8080/api/genres
+
+### Get a single genre by ID
+GET http://localhost:8080/api/genres/9d6f002a-4f60-4c74-a132-b9741d9c6afa
+
+### Get all books in a specific genre
+GET http://localhost:8080/api/genres/86f415a7-8fc9-40e3-a41d-4526cb986d9d/books
+
+### Delete a genre by ID
+DELETE http://localhost:8080/api/genres/0eb1ec97-072b-4e98-9c06-9a8ef99e21a9
+
+
+
+### Create a new book
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "name": "The Murder of Roger Ackroyd",
+  "authorFirstName": "Agatha",
+  "authorLastName": "Christie",
+  "popularity": 5.0,
+  "genreId": "cd290901-1952-4d74-b7a9-717d7f1bf6c9"
+}
+
+### Get all books
+GET http://localhost:8080/api/books
+
+### Get a single book by ID
+GET http://localhost:8080/api/books/75ea2856-8cf6-4cd8-8cd9-67ca37d5a4b5
+
+### Update a book by ID
+PUT http://localhost:8080/api/books/75ea2856-8cf6-4cd8-8cd9-67ca37d5a4b5
+Content-Type: application/json
+
+{
+  "name": "The Lord of the Rings",
+  "authorFirstName": "J.R.R.",
+  "authorLastName": "Tolkien",
+  "popularity": 4.5,
+  "genreId": "9d6f002a-4f60-4c74-a132-b9741d9c6afa"
+}
+
+### Delete a book by ID
+DELETE http://localhost:8080/api/books/068c4f84-a3d9-4d68-8983-f34a6bfff870

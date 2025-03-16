@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  genres-microservice:
+    build:
+      context: "./Library_Genres"
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_genres:5432/genresdb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_APPLICATION_NAME=genres-microservice
+      - SERVER_PORT=8081
+    networks:
+      - app-network
+    depends_on:
+      - postgres_genres
+
+  books-microservice:
+    build:
+      context: "./Library_Books"
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_books:5432/booksdb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_APPLICATION_NAME=books-microservice
+      - SERVER_PORT=8082
+    networks:
+      - app-network
+    depends_on:
+      - postgres_books
+
+  gateway:
+    build:
+      context: "./Library_Gateway"
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_APPLICATION_NAME=gateway-service
+      - SERVER_PORT=8080
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_ID=genres-service
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_URI=http://genres-microservice:8081
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0=Path=/api/genres/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_ID=books-service
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_URI=http://books-microservice:8082
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_PREDICATES_0=Path=/api/books/**
+      - SPRING_MAIN_WEB_APPLICATION_TYPE=reactive
+    networks:
+      - app-network
+
+  angular-app:
+    build:
+      context: "./library-angular-app"
+    container_name: angular-app
+    ports:
+      - "4200:80"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    networks:
+      - app-network
+
+  postgres_genres:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: genresdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  postgres_books:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: booksdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

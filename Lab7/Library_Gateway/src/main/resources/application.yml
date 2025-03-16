@@ -1,0 +1,54 @@
+
+server:
+  port: 8080  # Gateway runs on port 8080 by default
+
+spring:
+  application:
+    name: Lab5GatewayApplication
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+      routes:
+        - id: genres-microservice
+          uri: lb://genres-microservice
+          predicates:
+            - Path=/api/genres/**
+
+        - id: books-microservice
+          uri: lb://books-microservice
+          predicates:
+            - Path=/api/books/**
+
+        - id: simplified-genres-microservice
+          uri: lb://books-microservice
+          predicates:
+            - Path=/api/simplified-genres/**
+    discovery:
+      enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    hostname: gateway
+    instance-id: ${spring.application.name}:${server.port}
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: DEBUG

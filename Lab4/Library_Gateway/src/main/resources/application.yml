@@ -1,0 +1,26 @@
+server:
+  port: 8080  # Gateway runs on port 8080 by default
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: category-management-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/genres/**
+
+        - id: elements-management-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/books/**
+
+        - id: simplified-genre-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/simplified-genres/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: DEBUG
